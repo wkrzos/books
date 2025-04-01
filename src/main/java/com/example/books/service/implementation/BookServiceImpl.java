@@ -30,10 +30,7 @@ public class BookServiceImpl implements BookService {
         Author author = authorRepository.findById(dto.authorID())
                 .orElseThrow(() -> new AuthorNotFound(dto.authorID()));
 
-        log.info("{}", dto.isAvailable());
-
         Book book = bookMapper.toEntity(dto);
-        log.info("{}", book.isAvailable());
 
         book.setAuthor(author);
 
@@ -62,6 +59,7 @@ public class BookServiceImpl implements BookService {
         Author author = authorRepository.findById(dto.authorID())
                 .orElseThrow(() -> new AuthorNotFound(dto.authorID()));
 
+        book.setId(dto.id());
         book.setAuthor(author);
         book.setTitle(dto.title());
         book.setPages(dto.pages());

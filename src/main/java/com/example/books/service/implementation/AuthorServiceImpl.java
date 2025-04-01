@@ -47,6 +47,7 @@ public class AuthorServiceImpl implements AuthorService {
         Author author = authorRepository.findById(id)
                 .orElseThrow(() -> new AuthorNotFound(id));
 
+        author.setId(dto.id());
         author.setName(dto.name());
         author.setSurname(dto.surname());
 

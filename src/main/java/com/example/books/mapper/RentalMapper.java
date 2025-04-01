@@ -8,7 +8,6 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring", uses = {BookMapper.class, UserMapper.class})
 public interface RentalMapper {
 
-    @Mapping(target = "id", ignore = true)
     @Mapping(target = "user", source = "userDTO")
     @Mapping(target = "book", source = "bookDTO")
     Rental toEntity(RentalDTO rentalDTO);

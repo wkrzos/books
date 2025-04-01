@@ -8,7 +8,6 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface BookMapper {
 
-    @Mapping(target = "id", ignore = true)
     @Mapping(target = "author", ignore = true)
     @Mapping(target = "available", source = "isAvailable")
     Book toEntity(BookDTO bookDTO);
