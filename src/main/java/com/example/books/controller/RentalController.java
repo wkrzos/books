@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/rentals")
+@RequestMapping("/api/${api.version}/rentals")
 @AllArgsConstructor
 public class RentalController {
 
