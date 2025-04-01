@@ -3,6 +3,7 @@ package com.example.books.controller;
 import com.example.books.dto.UserDTO;
 import com.example.books.service.contract.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +18,13 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public ResponseEntity<List<UserDTO>> getAllUsers() {
-        List<UserDTO> users = userService.getAll();
+    public ResponseEntity<List<UserDTO>> getAllUsers(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        PageRequest pageable = PageRequest.of(page, size);
+
+        List<UserDTO> users = userService.getAll(pageable);
 
         return ResponseEntity
                 .ok(users);

@@ -1,5 +1,8 @@
 package com.example.books.service.generic;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+
 import java.util.List;
 
 public interface CRUDService<T, ID> {
@@ -7,5 +10,5 @@ public interface CRUDService<T, ID> {
     void delete(ID id);
     T update(ID id, T dto);
     T getById(ID id);
-    List<T> getAll();
+    List<T> getAll(Pageable pageable);
 }

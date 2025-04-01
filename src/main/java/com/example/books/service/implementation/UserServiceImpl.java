@@ -8,6 +8,9 @@ import com.example.books.repository.UserRepository;
 import com.example.books.service.contract.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -80,8 +83,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDTO> getAll() {
-        List<User> users = userRepository.findAll();
+    public List<UserDTO> getAll(Pageable pageable) {
+        Page<User> users = userRepository.findAll(pageable);
 
         log.info("Retrieved all users: {}", users);
 

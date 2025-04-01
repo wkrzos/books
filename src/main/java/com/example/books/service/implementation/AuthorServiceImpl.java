@@ -9,6 +9,9 @@ import com.example.books.service.contract.AuthorService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -69,8 +72,8 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public List<AuthorDTO> getAll() {
-        List<Author> authors = authorRepository.findAll();
+    public List<AuthorDTO> getAll(Pageable pageable) {
+        Page<Author> authors = authorRepository.findAll(pageable);
 
         log.info("Retrieved all authors: {}", authors);
 

@@ -12,6 +12,9 @@ import com.example.books.repository.BookRepository;
 import com.example.books.service.contract.BookService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -83,8 +86,8 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookDTO> getAll() {
-        List<Book> books = bookRepository.findAll();
+    public List<BookDTO> getAll(Pageable pageable) {
+        Page<Book> books = bookRepository.findAll(pageable);
 
         log.info("Retrieved all books: {}", books);
 

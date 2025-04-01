@@ -3,6 +3,7 @@ package com.example.books.controller;
 import com.example.books.dto.AuthorDTO;
 import com.example.books.service.contract.AuthorService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +18,12 @@ public class AuthorController {
     private final AuthorService authorService;
 
     @GetMapping
-    public ResponseEntity<List<AuthorDTO>> getAllAuthors() {
-        List<AuthorDTO> authors = authorService.getAll();
+    public ResponseEntity<List<AuthorDTO>> getAllAuthors(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        PageRequest pageable = PageRequest.of(page, size);
+        List<AuthorDTO> authors = authorService.getAll(pageable);
 
         return ResponseEntity
                 .ok(authors);
