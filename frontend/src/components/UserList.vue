@@ -16,6 +16,8 @@
           <th>ID</th>
           <th>Username</th>
           <th>Email</th>
+          <th>Name</th>
+          <th>Surname</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -24,6 +26,8 @@
           <td>{{ user.id }}</td>
           <td>{{ user.username }}</td>
           <td>{{ user.email }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.surname }}</td>
           <td>
             <button @click="editUser(user)">Edit</button>
             <button @click="deleteUser(user.id)" class="delete-btn">Delete</button>
@@ -55,6 +59,14 @@
             <label for="password">Password:</label>
             <input v-model="currentUser.password" id="password" type="password" :required="!editingUser" />
           </div>
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input v-model="currentUser.name" id="name" required />
+          </div>
+          <div class="form-group">
+            <label for="surname">Surname:</label>
+            <input v-model="currentUser.surname" id="surname" required />
+          </div>
           <div class="button-group">
             <button type="submit">Save</button>
             <button type="button" @click="cancelEdit">Cancel</button>
@@ -80,7 +92,9 @@ export default {
       currentUser: {
         username: '',
         email: '',
-        password: ''
+        password: '',
+        name: '',
+        surname: ''
       },
       searchUsername: ''
     };
@@ -128,7 +142,10 @@ export default {
     },
     editUser(user) {
       this.editingUser = user;
-      this.currentUser = { ...user, password: '' }; // Don't include password when editing
+      this.currentUser = { 
+        ...user, 
+        password: '' // Don't include password when editing
+      }; 
       this.showCreateForm = true;
     },
     async saveUser() {
@@ -151,7 +168,9 @@ export default {
       this.currentUser = {
         username: '',
         email: '',
-        password: ''
+        password: '',
+        name: '',
+        surname: ''
       };
     },
     prevPage() {
