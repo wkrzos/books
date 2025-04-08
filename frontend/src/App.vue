@@ -1,17 +1,16 @@
 <template>
   <div id="app">
-    <AuthorList />
+    <nav>
+      <router-link to="/authors">Authors</router-link> |
+      <router-link to="/books">Books</router-link>
+    </nav>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import AuthorList from './components/AuthorList.vue'
-
 export default {
-  name: 'App',
-  components: {
-    AuthorList
-  }
+  name: 'App'
 }
 </script>
 
@@ -22,5 +21,19 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   margin: 0;
   padding: 20px;
+}
+
+nav {
+  margin-bottom: 20px;
+}
+
+nav a {
+  margin-right: 10px;
+  text-decoration: none;
+  color: #2c3e50;
+}
+
+nav a.router-link-active {
+  color: #42b983;
 }
 </style>
