@@ -40,6 +40,11 @@ const routes = [
   }
 ]
 
+// API Configuration
+// You can modify these settings to point to your backend API
+// API_URL: http://localhost:8080
+// API_PORT: 8080
+
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
