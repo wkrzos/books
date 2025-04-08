@@ -4,24 +4,28 @@
     
     <div class="rental-form">
       <h3>Rent a Book</h3>
-      <div class="form-group">
-        <label for="bookId">Book ID:</label>
-        <input v-model="rentForm.bookId" type="number" id="bookId" required />
-      </div>
-      <div class="form-group">
-        <label for="username">Username:</label>
-        <input v-model="rentForm.username" type="text" id="username" required />
-      </div>
-      <button @click="rentBook" :disabled="isRentFormInvalid">Rent Book</button>
+      <form @submit.prevent="rentBook">
+        <div class="form-group">
+          <label for="bookId">Book ID:</label>
+          <input v-model="rentForm.bookId" type="number" id="bookId" required />
+        </div>
+        <div class="form-group">
+          <label for="username">Username:</label>
+          <input v-model="rentForm.username" type="text" id="username" required />
+        </div>
+        <button type="submit" :disabled="isRentFormInvalid">Rent Book</button>
+      </form>
     </div>
 
     <div class="return-form">
       <h3>Return a Book</h3>
-      <div class="form-group">
-        <label for="rentalId">Rental ID:</label>
-        <input v-model="returnForm.rentalId" type="number" id="rentalId" required />
-      </div>
-      <button @click="returnBook" :disabled="!returnForm.rentalId">Return Book</button>
+      <form @submit.prevent="returnBook">
+        <div class="form-group">
+          <label for="rentalId">Rental ID:</label>
+          <input v-model="returnForm.rentalId" type="number" id="rentalId" required />
+        </div>
+        <button type="submit" :disabled="!returnForm.rentalId">Return Book</button>
+      </form>
     </div>
 
     <div v-if="currentRental" class="rental-details">
@@ -125,6 +129,7 @@ export default {
   padding: 20px;
   border-radius: 5px;
   margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .form-group {
@@ -145,12 +150,16 @@ export default {
 }
 
 button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 10px 15px;
+  padding: 8px 15px;
+  cursor: pointer;
   border: none;
   border-radius: 4px;
-  cursor: pointer;
+  background-color: #2196F3;
+  color: white;
+}
+
+button:hover {
+  opacity: 0.9;
 }
 
 button:disabled {
@@ -167,6 +176,7 @@ button:disabled {
   border: 1px solid #ddd;
   padding: 15px;
   border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .detail-card div {
@@ -184,5 +194,14 @@ button:disabled {
   background-color: #ffebee;
   border-radius: 4px;
   margin-top: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Add button to match other components */
+button[type="submit"] {
+  background-color: #4CAF50;
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
 }
 </style>

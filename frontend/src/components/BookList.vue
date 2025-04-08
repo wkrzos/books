@@ -1,7 +1,7 @@
 <template>
   <div class="books">
     <h2>Books</h2>
-    <button @click="showCreateForm = true">Add New Book</button>
+    <button @click="showCreateForm = true" class="add-button">Add New Book</button>
 
     <table>
       <thead>
@@ -23,7 +23,7 @@
           <td>{{ book.isAvailable ? 'Yes' : 'No' }}</td>
           <td>
             <button @click="editBook(book)">Edit</button>
-            <button @click="deleteBook(book.id)">Delete</button>
+            <button @click="deleteBook(book.id)" class="delete-btn">Delete</button>
           </td>
         </tr>
       </tbody>
@@ -41,20 +41,20 @@
         <h3>{{ editingBook ? 'Edit Book' : 'Create Book' }}</h3>
         <form @submit.prevent="saveBook">
           <div class="form-group">
-            <label>Title:</label>
-            <input v-model="currentBook.title" required />
+            <label for="title">Title:</label>
+            <input v-model="currentBook.title" id="title" required />
           </div>
           <div class="form-group">
-            <label>Author ID:</label>
-            <input v-model="currentBook.authorID" type="number" required />
+            <label for="authorId">Author ID:</label>
+            <input v-model="currentBook.authorID" id="authorId" type="number" required />
           </div>
           <div class="form-group">
-            <label>Pages:</label>
-            <input v-model="currentBook.pages" type="number" />
+            <label for="pages">Pages:</label>
+            <input v-model="currentBook.pages" id="pages" type="number" />
           </div>
           <div class="form-group">
-            <label>Available:</label>
-            <input v-model="currentBook.isAvailable" type="checkbox" />
+            <label for="available">Available:</label>
+            <input v-model="currentBook.isAvailable" id="available" type="checkbox" />
           </div>
           <div class="button-group">
             <button type="submit">Save</button>
@@ -158,6 +158,12 @@ export default {
   padding: 20px;
 }
 
+.add-button {
+  margin-bottom: 15px;
+  background-color: #4CAF50;
+  color: white;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -166,8 +172,16 @@ table {
 
 th, td {
   border: 1px solid #ddd;
-  padding: 8px;
+  padding: 12px;
   text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
 }
 
 .modal {
@@ -180,13 +194,15 @@ th, td {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 100;
 }
 
 .modal-content {
   background: white;
-  padding: 20px;
+  padding: 25px;
   border-radius: 5px;
-  min-width: 300px;
+  min-width: 350px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .form-group {
@@ -196,29 +212,50 @@ th, td {
 .form-group label {
   display: block;
   margin-bottom: 5px;
+  font-weight: bold;
 }
 
 .form-group input[type="text"],
 .form-group input[type="number"] {
   width: 100%;
   padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
 
 .button-group {
-  margin-top: 20px;
   display: flex;
   justify-content: space-between;
-}
-
-.pagination {
   margin-top: 20px;
-  display: flex;
-  gap: 10px;
-  align-items: center;
 }
 
 button {
-  padding: 5px 10px;
+  padding: 8px 15px;
   cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  background-color: #2196F3;
+  color: white;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.delete-btn {
+  background-color: #f44336;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 10px;
 }
 </style>
